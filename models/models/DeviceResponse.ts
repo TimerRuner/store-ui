@@ -5,12 +5,14 @@ export interface IRating {
 }
 
 export interface ICharacteristic {
+    id: number
     name: string
     description: string
     deviceId: number
 }
 
 export interface IDevice {
+    id: number
     name: string;
     picture: string;
     price: number

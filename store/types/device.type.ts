@@ -1,18 +1,19 @@
 import {IDevice} from "../../models/models/DeviceResponse";
 
-interface IType {name: string, id: number}
-interface IBrand {name: string, id: number}
+export interface IType {name: string, id: number}
+export interface IBrand {name: string, id: number}
 export interface IDeviceState {
     types: Array<IType>,
     brands: Array<IBrand>,
     devices: Array<IDevice>,
-    selectedType: string,
-    selectedBrand: string,
+    selectedType: IType | null,
+    selectedBrand: IBrand | null,
     page: number,
     totalCount:  number,
     limit: number,
     loading: false,
-    error: string
+    error: string,
+    amount: number
 }
 
 export enum DeviceActionConst {
@@ -24,12 +25,18 @@ export enum DeviceActionConst {
     SET_PAGE = "SET_PAGE",
     SET_TOTAL_COUNT = "SET_TOTAL_COUNT",
     SET_LIMIT = "SET_LIMIT",
-    SET_LOADING = "SET_LOADING"
+    SET_LOADING = "SET_LOADING",
+    SET_AMOUNT = "SET_AMOUNT",
 }
 
 export interface DeviceSetTypes {
     type: DeviceActionConst.SET_TYPES,
     payload: Array<IType>
+}
+
+export interface DeviceSetAmount {
+    type: DeviceActionConst.SET_AMOUNT,
+    payload: number
 }
 
 export interface DeviceSetBrands {
@@ -44,12 +51,12 @@ export interface DeviceSetDevice {
 
 export interface DeviceSelectType {
     type: DeviceActionConst.SELECT_TYPE,
-    payload: string
+    payload: IType
 }
 
 export interface DeviceSelectBrand {
     type: DeviceActionConst.SELECT_BRAND,
-    payload: string
+    payload: IBrand
 }
 
 export interface DeviceSetPage {
@@ -73,4 +80,4 @@ export interface DeviceSetLoading {
 }
 
 export type DeviceActionTypes = DeviceSetTypes | DeviceSetBrands | DeviceSetDevice | DeviceSelectType
- | DeviceSelectBrand | DeviceSetPage | DeviceSetTotalCount | DeviceSetLimit | DeviceSetLoading
+ | DeviceSelectBrand | DeviceSetPage | DeviceSetTotalCount | DeviceSetLimit | DeviceSetLoading | DeviceSetAmount

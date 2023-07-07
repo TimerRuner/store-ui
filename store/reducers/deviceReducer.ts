@@ -4,13 +4,14 @@ export const initialDeviceState: IDeviceState = {
     types: [],
     brands: [],
     devices: [],
-    selectedType: "",
-    selectedBrand: "",
+    selectedType: null,
+    selectedBrand: null,
     page: 1,
     totalCount:  0,
     limit: 5,
     loading: false,
-    error: ""
+    error: "",
+    amount: 0
 }
 
 export const deviceReducer = (state: IDeviceState = initialDeviceState, action: DeviceActionTypes) => {
