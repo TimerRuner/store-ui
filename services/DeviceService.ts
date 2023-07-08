@@ -1,6 +1,7 @@
 import $api from "../http"
 import { AxiosResponse } from "axios"
 import {ICharacteristic, IDevice} from "../models/models/DeviceResponse";
+import {IBasketDevice} from "../store/types/device.type";
 
 export default class DeviceService {
 
@@ -18,6 +19,18 @@ export default class DeviceService {
         } else {
             return await $api.get(`/device/all?limit=${limit}&offset=${offset}`)
         }
+    }
+
+    static addBasketDevice = async (deviceId: number): Promise<AxiosResponse<IBasketDevice>> => {
+        return await $api.post('/basketDevice/create', {deviceId})
+    }
+
+    static getBasketDevices = async (): Promise<AxiosResponse<IBasketDevice[]>> => {
+        return await $api.get('/basketDevice/all')
+    }
+
+    static deleteBasketDevice = async (deviceId: number) => {
+        return await $api.delete(`/basketDevice/delete/${deviceId}`)
     }
 
     static fetchOneDevice = async (id): Promise<AxiosResponse<IDevice>> => {

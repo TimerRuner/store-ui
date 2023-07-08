@@ -21,6 +21,8 @@ import {useActions} from "../hooks/actionCreator";
 import {ERoutes} from "../models/constants/routes";
 import {EColor} from "../models/colors/colors";
 import Cookies from "js-cookie";
+import {useTypeSelector} from "../hooks/useSelector";
+import {useEffect} from "react";
 
 
 const menuItems = [
@@ -32,14 +34,20 @@ const menuItems = [
 
 export default function Navbar() {
     const { isOpen, onOpen, onClose } = useDisclosure()
+    const {basketDevices} = useTypeSelector(state => state.device)
+    const {fetchBasketDevices} = useActions()
     const router = useRouter()
     const {logout} = useActions()
+
+    useEffect(() => {
+        fetchBasketDevices()
+    }, [])
     const logoutHandler = () => {
         logout()
         const accessToken = localStorage.getItem("token")
         if(!accessToken) return Cookies.remove("user")
     }
-
+    console.log(basketDevices)
     return (
         <Box bg={EColor.green}>
             <Menu>
@@ -55,6 +63,7 @@ export default function Navbar() {
                         }
                         variant='outline'
                     />
+                    <Button onClick={() => router.push(ERoutes.BASKET_ROUTE)}>{`Basket ${basketDevices?.length}`}</Button>
                     <Button bg={EColor.greenLight}  onClick={logoutHandler}>Logout</Button>
                 </Flex>
             </Menu>

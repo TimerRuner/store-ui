@@ -11,7 +11,8 @@ export const initialDeviceState: IDeviceState = {
     limit: 5,
     loading: false,
     error: "",
-    count: 0
+    count: 0,
+    basketDevices: null
 }
 
 export const deviceReducer = (state: IDeviceState = initialDeviceState, action: DeviceActionTypes) => {
@@ -36,6 +37,8 @@ export const deviceReducer = (state: IDeviceState = initialDeviceState, action: 
             return {...state, loading: action.payload}
         case DeviceActionConst.SET_AMOUNT:
             return {...state, count: action.payload}
+        case DeviceActionConst.ADD_BASKET_DEVICE:
+            return {...state, basketDevices: action.payload}
         default:
             return state
     }

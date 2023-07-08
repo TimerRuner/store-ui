@@ -48,6 +48,45 @@ export const fetchDevices = (typeId: number, brandId: number, offset: number = 0
     }
 }
 
+export const addBasketDevice = (deviceId: number) => {
+    return async (dispatch: Dispatch<DeviceActionTypes>) => {
+        try {
+            dispatch({type: DeviceActionConst.SET_LOADING, payload: true})
+
+            await DeviceService.addBasketDevice(deviceId)
+            const response = await DeviceService.getBasketDevices()
+            dispatch({type: DeviceActionConst.ADD_BASKET_DEVICE, payload: response.data})
+        } finally {
+            dispatch({type: DeviceActionConst.SET_LOADING, payload: false})
+        }
+    }
+}
+
+export const fetchBasketDevices = () => {
+    return async (dispatch: Dispatch<DeviceActionTypes>) => {
+        try {
+            dispatch({type: DeviceActionConst.SET_LOADING, payload: true})
+            const response = await DeviceService.getBasketDevices()
+            dispatch({type: DeviceActionConst.ADD_BASKET_DEVICE, payload: response.data})
+        } finally {
+            dispatch({type: DeviceActionConst.SET_LOADING, payload: false})
+        }
+    }
+}
+
+export const deleteBasketDevices = (deviceId: number) => {
+    return async (dispatch: Dispatch<DeviceActionTypes>) => {
+        try {
+            dispatch({type: DeviceActionConst.SET_LOADING, payload: true})
+            await DeviceService.deleteBasketDevice(deviceId)
+            const response = await DeviceService.getBasketDevices()
+            dispatch({type: DeviceActionConst.ADD_BASKET_DEVICE, payload: response.data})
+        } finally {
+            dispatch({type: DeviceActionConst.SET_LOADING, payload: false})
+        }
+    }
+}
+
 export const setType = (type: IType) => {
     return async (dispatch: Dispatch<DeviceActionTypes>)=> {
         dispatch({type: DeviceActionConst.SELECT_TYPE, payload: type})

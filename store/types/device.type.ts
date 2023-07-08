@@ -6,6 +6,7 @@ export interface IDeviceState {
     types: Array<IType>,
     brands: Array<IBrand>,
     devices: Array<IDevice>,
+    basketDevices: IBasketDevice[] | null,
     selectedType: IType | null,
     selectedBrand: IBrand | null,
     page: number,
@@ -14,6 +15,13 @@ export interface IDeviceState {
     loading: false,
     error: string,
     count: number
+}
+
+export interface IBasketDevice {
+    basketId: number,
+    deviceId: number,
+    device: IDevice,
+    id: number
 }
 
 export enum DeviceActionConst {
@@ -27,11 +35,17 @@ export enum DeviceActionConst {
     SET_LIMIT = "SET_LIMIT",
     SET_LOADING = "SET_LOADING",
     SET_AMOUNT = "SET_AMOUNT",
+    ADD_BASKET_DEVICE = "ADD_BASKET_DEVICE"
 }
 
 export interface DeviceSetTypes {
     type: DeviceActionConst.SET_TYPES,
     payload: Array<IType>
+}
+
+export interface DeviceAddBasketDevice {
+    type: DeviceActionConst.ADD_BASKET_DEVICE,
+    payload: Array<IBasketDevice>
 }
 
 export interface DeviceSetAmount {
@@ -80,4 +94,4 @@ export interface DeviceSetLoading {
 }
 
 export type DeviceActionTypes = DeviceSetTypes | DeviceSetBrands | DeviceSetDevice | DeviceSelectType
- | DeviceSelectBrand | DeviceSetPage | DeviceSetTotalCount | DeviceSetLimit | DeviceSetLoading | DeviceSetAmount
+ | DeviceSelectBrand | DeviceSetPage | DeviceSetTotalCount | DeviceSetLimit | DeviceSetLoading | DeviceSetAmount | DeviceAddBasketDevice
