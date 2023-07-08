@@ -26,8 +26,8 @@ const CreateBrand = ({show, onHide}) => {
             onClose={() => onHide()}
         >
             <ModalOverlay />
+            <ModalCloseButton />
             <ModalContent>
-                <ModalCloseButton />
                 <ModalHeader>
                     Add type
                 </ModalHeader>
@@ -38,6 +38,7 @@ const CreateBrand = ({show, onHide}) => {
                         placeholder={"Enter type name"}
                     />
                 </ModalBody>
+
                 <ModalFooter>
                     <Button variant="outline-danger" onClick={onHide}>Close</Button>
                     <Button variant="outline-success" onClick={addBrand}>Add</Button>

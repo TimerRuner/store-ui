@@ -13,7 +13,7 @@ export interface IDeviceState {
     limit: number,
     loading: false,
     error: string,
-    amount: number
+    count: number
 }
 
 export enum DeviceActionConst {

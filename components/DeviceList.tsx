@@ -1,16 +1,15 @@
 import {useTypeSelector} from "../hooks/useSelector";
-import {Box} from "@chakra-ui/react";
+import {Flex} from "@chakra-ui/react";
 import DeviceItem from "./DeviceItem";
 
 const DeviceList = () => {
     const {devices} = useTypeSelector(store => store.device)
-
     return (
-        <Box>
+        <Flex p={4} gap={4} alignItems="center" flexWrap="wrap">
             {devices.map(device =>
                 <DeviceItem key={device.id} device={device}/>
             )}
-        </Box>
+        </Flex>
     );
 };
 

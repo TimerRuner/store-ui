@@ -11,7 +11,7 @@ export const initialDeviceState: IDeviceState = {
     limit: 5,
     loading: false,
     error: "",
-    amount: 0
+    count: 0
 }
 
 export const deviceReducer = (state: IDeviceState = initialDeviceState, action: DeviceActionTypes) => {
@@ -34,5 +34,9 @@ export const deviceReducer = (state: IDeviceState = initialDeviceState, action: 
             return {...state, limit: action.payload}
         case DeviceActionConst.SET_LOADING:
             return {...state, loading: action.payload}
+        case DeviceActionConst.SET_AMOUNT:
+            return {...state, count: action.payload}
+        default:
+            return state
     }
 }

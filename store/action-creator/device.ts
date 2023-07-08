@@ -41,7 +41,7 @@ export const fetchDevices = (typeId: number, brandId: number, offset: number = 0
             const response = await DeviceService.fetchDevices(typeId, brandId, offset, limit)
 
             dispatch({type: DeviceActionConst.SET_DEVICES, payload: response.data.rows})
-            dispatch({type: DeviceActionConst.SET_AMOUNT, payload: response.data.amount})
+            dispatch({type: DeviceActionConst.SET_AMOUNT, payload: response.data.count})
         } finally {
             dispatch({type: DeviceActionConst.SET_LOADING, payload: false})
         }
@@ -56,7 +56,7 @@ export const setType = (type: IType) => {
 
 export const setBrand = (brand: IBrand) => {
     return async (dispatch: Dispatch<DeviceActionTypes>)=> {
-        dispatch({type: DeviceActionConst.SELECT_TYPE, payload: brand})
+        dispatch({type: DeviceActionConst.SELECT_BRAND, payload: brand})
     }
 }
 

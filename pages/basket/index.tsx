@@ -1,8 +1,12 @@
+import MainLayout from "../../layout/MainLayout";
+
 const Basket = () => {
     return (
-        <div>
-            basket
-        </div>
+        <MainLayout>
+            <div>
+                basket
+            </div>
+        </MainLayout>
     );
 };
 

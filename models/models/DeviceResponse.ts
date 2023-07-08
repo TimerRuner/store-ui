@@ -5,8 +5,8 @@ export interface IRating {
 }
 
 export interface ICharacteristic {
-    id: number
-    name: string
+    id?: number
+    title: string
     description: string
     deviceId: number
 }
