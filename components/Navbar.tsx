@@ -6,8 +6,9 @@ import {
     Drawer,
     DrawerContent,
     DrawerOverlay,
-    Flex, Heading,
-    IconButton, Input, InputGroup, InputLeftElement,
+    Flex,
+    Heading,
+    IconButton,
     List,
     ListItem,
     MenuButton,
@@ -20,29 +21,33 @@ import {useActions} from "../hooks/actionCreator";
 import {ERoutes} from "../models/constants/routes";
 import {EColor} from "../models/colors/colors";
 import Cookies from "js-cookie";
-import {SearchIcon} from "@chakra-ui/icons";
-import {setSearchQuery} from "../store/action-creator/track";
+import {useTypeSelector} from "../hooks/useSelector";
+import {useEffect} from "react";
 
 
 const menuItems = [
     {text: 'Main page', href: ERoutes.MAIN},
+    {text: "Admin", href: ERoutes.ADMIN},
+    {text: "Shop", href: ERoutes.SHOP_ROUTE},
+    {text: "Basket", href: ERoutes.BASKET_ROUTE},
 ]
 
 export default function Navbar() {
     const { isOpen, onOpen, onClose } = useDisclosure()
+    const {basketDevices} = useTypeSelector(state => state.device)
+    const {fetchBasketDevices} = useActions()
     const router = useRouter()
-    const {logout, searchTracks, setSearchQuery} = useActions()
+    const {logout} = useActions()
+
+    useEffect(() => {
+        fetchBasketDevices()
+    }, [])
     const logoutHandler = () => {
         logout()
         const accessToken = localStorage.getItem("token")
         if(!accessToken) return Cookies.remove("user")
     }
-
-    const searchHandler = (e: React.ChangeEvent<HTMLInputElement>) => {
-        searchTracks(e.target.value)
-        setSearchQuery(e.target.value)
-    }
-
+    console.log(basketDevices)
     return (
         <Box bg={EColor.green}>
             <Menu>
@@ -58,12 +63,7 @@ export default function Navbar() {
                         }
                         variant='outline'
                     />
-                    <InputGroup width="250px">
-                        <InputLeftElement pointerEvents="none">
-                            <SearchIcon color="gray.300" />
-                        </InputLeftElement>
-                        <Input onChange={searchHandler} bg="white" color="black" type="text" placeholder="Search..." />
-                    </InputGroup>
+                    <Button onClick={() => router.push(ERoutes.BASKET_ROUTE)}>{`Basket ${basketDevices?.length}`}</Button>
                     <Button bg={EColor.greenLight}  onClick={logoutHandler}>Logout</Button>
                 </Flex>
             </Menu>

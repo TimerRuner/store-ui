@@ -3,7 +3,8 @@ import type { AppProps } from 'next/app'
 import {wrapper} from "../store";
 import {useRouter} from "next/router";
 import ProtectedRoute from "../components/ProtectedRoute";
-import {ChakraProvider} from "@chakra-ui/react";
+import {ChakraProvider, extendTheme} from "@chakra-ui/react";
+
 
 const publicRoutes = ["/signup", "/login"]
 
